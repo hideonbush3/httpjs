@@ -5,7 +5,7 @@ const port = process.env.PORT || 3000; // 실행하고 주소창에 127.0.0.1:30
 // 요청 path: /
 // 요청 path: /user
 // 요청 path: /about
-// 그외 나머지:
+// 그외 나머지: 404 - 페이지없음
 const html = "text/html; charset=utf-8";
 const server = http.createServer((req, res) => {
   switch (req.url) {
