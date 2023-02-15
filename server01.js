@@ -5,7 +5,7 @@ const port = process.env.PORT || 3000; // 실행하고 주소창에 127.0.0.1:30
 const server = http.createServer((req, res) => {
   // 응답헤더 작성 : 응답코드, 응답 데이터 형식 지정
   res.writeHead(200, { "Content-Type": "text/plain" }); // 정보가 기록되는 헤더
-  res.end("hello, World");  // 응답 종료 메서드인데
+  res.end("hello, World");  // 응답 종료 메서드
 });
 
 server.listen(port, () => {
