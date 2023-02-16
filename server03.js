@@ -6,12 +6,12 @@ const port = process.env.PORT || 3000; // 실행하고 주소창에 127.0.0.1:30
 const html = "text/html; charset=utf-8";
 
 // 요청에 대한 정적파일을 서비스하는 함수
-// 비동기적으로 파일 읽기 fs.readFile(파일명, 콜백함수)
-// 콜백함수의 첫번째 매개변수는 오류객체이고 두번째 매개변수는 원하는값
 function serveStaticFile(res, fname) {
+  // 비동기적으로 파일 읽기 fs.readFile(파일명, 콜백함수)
+  // 콜백함수의 첫번째 매개변수는 오류객체이고 두번째 매개변수는 원하는값
+  // 지정한 경로의 파일을 정상적으로 읽고 data 변수에 넣는다
+  // 에러 발생시에는 err 변수에 넣는다
   fs.readFile(path.join(__dirname, "public", fname), (err, data) => {
-    // 지정한 경로의 파일을 정상적으로 읽고 data 변수에 넣는다
-    //에러 발생시에는 err 변수에 넣는다
     if (err) {
       // 파일을 읽다가 오류가 발생했다면
       // 응답코드 500 전송 후 오류메시지 출력

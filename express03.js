@@ -9,8 +9,10 @@ const port = process.env.PORT || 3000;
 // 서버 애플리케이션 객체 생성
 const app = express();
 
-// static 폴더 안에 있는 파일은 라우팅을 거치지 않고 직접 호출해서 응답
-// http://127.0.0.1:3000/img/smile.png
+// static 폴더 안에 있는 파일을 라우팅 없이 바로 호출할 수 있도록 설정한다
+// localhost:3000/img/switzerland.png
+// __dirname은 현재 실행중인 스크립트 파일의 디렉토리 경로를 뜻함
+// 여기선 Users\ASUS\Documents\https 라는 문자열 값을 가짐
 app.use(express.static(path.join(__dirname, "static")));
 
 // 로그 설정

@@ -35,7 +35,7 @@ app.get("/about", (req, res) => {
 // custom 404 routing
 // 라우팅 설정 2 : app.use(경로, 콜백함수) - 요청이 왔을때 실행할 함수를 지정
 app.use((req, res) => {
-  // use 메서드에서 경로 설정하지 않으면 웹 페이지에서 경로를 입력하지 않은 경우 여기 도달함
+  // use 메서드에서 경로 설정하지 않으면 웹 페이지에서 경로를 잘못 입력한 경우 여기 도달함
   res.type(html);
   res.status(404);
   res.end("<h1>404 - 존재하지 않는 페이지</h1>");
