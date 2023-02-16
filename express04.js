@@ -4,20 +4,32 @@ const aboutRouter = require("./routes/about.js");
 const path = require("path");
 const logger = require("morgan"); // 로그 출력기
 
-// { 속성명 } - 구조분해할당 형식
-// express-handlebars 패키지에서 제공하는 engine 속성을 가져오는 것
-const { engine } = require("express-handlebars");
-
 const express = require("express");
 const port = process.env.PORT || 3000;
 const app = express();
 
+// express-handlebars 패키지에서 제공하는 engine 속성을 가져오는 것
+// engine 속성은 메서드임
+// { 속성명 } - 구조분해할당 형식
+const { engine } = require("express-handlebars");
+
 // view 템플릿 엔진 설정
+// express 애플리케이션의 사용할 뷰 엔진을 설정하는 메서드 engine
+// handlebars 패키지에서 가져온 engine 메서드와는 다름
+// 첫번째 매개변수는 템플릿 엔진의 이름
+// 두번째 매개변수는 템플릿 엔진의 옵션
 app.engine(
   "hbs",
   engine({
     extname: ".hbs",
     defaultLayout: "layout",
+    helpers: {
+      section: function (name, options) {
+        if (!this._sections) this._sections = {};
+        this._sections[name] = options.fn(this);
+        return null;
+      },
+    },
   })
 );
 app.set("views", path.join(__dirname, "views"));

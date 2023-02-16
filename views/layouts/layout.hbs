@@ -4,13 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ title }}</title>
-    <style></style>
+    {{{ _sections.css }}}
 </head>
 <body>
-<header>헤더</header>
+{{> header }}
 
 {{{ body }}}
 
-<footer>푸터</footer>
+{{> footer }}
+
+{{{ _sections.script}}}
 </body>
 </html>
