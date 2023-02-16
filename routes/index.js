@@ -7,9 +7,9 @@ router.get("/", (req, res) => {
   //res.sendFile(path.join(__dirname, '../public', 'index.html'));
 
   // handlebars 뷰 엔진으로 응답처리
-  // render의 매개변수는 laybody에 들어갈 hbs 파일명, layout.hbs
-  // render 매개변수중 view 이름에 확장자 .hbs 쓸 필요없음
-  // 두번쨰 매개변수는 {키:값}
+  // render의 매개변수는 두개다
+  // 첫번째는 layout.hbs의 body에 들어갈 hbs 파일명,
+  // 두번째는 layout.hbs에 지정해놓은 키와 값 - {키:값} 형식
   res.render('index', {title: 'index페이지'})
 });
 
