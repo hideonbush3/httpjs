@@ -32,8 +32,6 @@ router.get("/sungjuk", (req, res) => {
   res.render("sungjuk", { title: "성적처리" });
 });
 
-oracledb.initOracleClient({ libDir: "C:/JAVA/instantclient_19_17" });
-
 router.post("/sungjuk", async (req, res, next) => {
   // 폼으로 전송된 데이터들은 req.body, req.body.폼이름
   console.log(req.body)
@@ -63,6 +61,7 @@ router.post("/sungjuk", async (req, res, next) => {
 
   let conn = null;
   try {
+    oracledb.initOracleClient({ libDir: "C:/JAVA/instantclient_19_17" });
     conn = await oracledb.getConnection(dbconfig);
     await conn.execute(sql, params);
     await conn.commit(); // insert 할때 반드시 필요!
