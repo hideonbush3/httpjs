@@ -5,7 +5,7 @@ const html = "text/html; charset=utf-8";
 
 router.get("/", (req, res) => {
   // res.sendFile(path.join(__dirname, "../public", "user.html"));
-  res.render('user', {title: 'user페이지'});
+  res.render('user', {title: '유저'});
 });
 
 
