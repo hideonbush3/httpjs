@@ -18,7 +18,7 @@
 const express = require("express");
 const router = express.Router();
 const path = require("path");
-const Sungjuk = require("../models/Sungjuk");
+const SungJuk = require("../models/Sungjuk");
 
 // show index page
 router.get("/", (req, res) => {
@@ -26,10 +26,10 @@ router.get("/", (req, res) => {
   res.render("index", { title: "홈" });
 });
 
+// 성적처리
 router.get("/sungjuk", (req, res) => {
   res.render("sungjuk", { title: "성적처리" });
 });
-
 router.post("/sungjuk", (req, res, next) => {
   // 폼으로 전송된 데이터들은 req.body, req.body.폼이름
   // console.log(req.body);
@@ -41,31 +41,38 @@ router.post("/sungjuk", (req, res, next) => {
   mat = parseInt(mat);
   console.log(name, kor, eng, mat);
 
-  // 성적처리 - 컨트롤러
+  // 성적처리
   let [tot, avg, grd] = [kor + eng + mat, (kor + eng + mat) / 3, "가"];
-  switch (Math.floor(avg / 10)) {
-    case 10:
-      grd = "수";
-      break;
-    case 9:
-      grd = "수";
-      break;
-    case 8:
-      grd = "우";
-      break;
-    case 7:
-      grd = "미";
-      break;
-    case 6:
-      grd = "양";
-      break;
-  }
+  if (avg >= 90) grd = "수";
+  else if (avg >= 80) grd = "우";
+  else if (avg >= 70) grd = "미";
+  else if (avg >= 60) grd = "양";
   console.log(tot, avg, grd);
 
   // 데이터베이스 처리  - sungjuk 테이블에 insert - 모델
-  new Sungjuk(name, kor, eng, mat, tot, avg, grd).insert();
-
+  new SungJuk(name, kor, eng, mat, tot, avg, grd).insert();
   res.redirect(302, "/");
+});
+
+router.get("/showsungjuk", async (req, res) => {
+  let sjs = new SungJuk().select().then(async (result) => {
+    return await result;
+  });
+  console.log(await sjs);
+
+  res.render("showsungjuk", { title: "성적전체보기", sjs: await sjs });
+});
+
+router.get("/viewsungjuk", async (req, res) => {
+  let sjno = req.query.sjno; // queryString의 매개변수 추출
+
+  let sjs = new SungJuk().selectOne(sjno).then(async result => {
+    return await result;
+  });
+  console.log(await sjs);
+
+  res.render("viewsungjuk",
+      { title: "성적상세보기", sjs: await sjs });
 });
 
 // module.exports를 사용하여 라우터 객체를 외부로 내보낸다
