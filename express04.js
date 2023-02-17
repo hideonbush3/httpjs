@@ -7,7 +7,7 @@ const bodyParser = require("body-parser"); // 폼 처리기
 const oracledb = require("./models/Oracle");
 
 const express = require("express");
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 const app = express();
 
 // express-handlebars 패키지에서 제공하는 engine 속성을 가져오는 것
